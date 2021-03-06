@@ -1,0 +1,31 @@
+<div class="columns">
+  <div class="column">
+    <%= simple_form_for([@tweet, @tweet.comments.build]) do |f| %>
+    <article class="media">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <%= gravatar_image_tag(current_user.email, size: 64, alt: current_user.name) %>
+        </p>
+        <%= f.label current_user.name %>
+        <%= f.hidden_field :name, :value => current_user.name  %>
+        <%= f.hidden_field :username, :value => current_user.username  %>
+        <%= f.hidden_field :email, :value => current_user.email  %>
+      </figure>
+      <div class="media-content">
+        <div class="field">
+          <p class="control">
+            <%= f.input :body, input_html: {class: 'textarea'}, wrapper: false, label_html: {class: 'label'} %>
+          </p>
+        </div>
+        <nav class="level">
+          <div class="level-left">
+            <div class="level-item">
+              <%= f.button :submit, class: "button is-primary" %>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </article>
+    <% end %>
+  </div>
+</div>
