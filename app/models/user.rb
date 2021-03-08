@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :tweets
   validates_uniqueness_of :username
   validates_uniqueness_of :name
+  acts_as_voter
 end

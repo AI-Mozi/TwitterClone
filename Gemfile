@@ -31,6 +31,10 @@ gem 'simple_form', '~> 5.0', '>= 5.0.2'
 gem 'gravatar_image_tag', '~> 1.2'
 gem 'devise', '~> 4.7', '>= 4.7.1'
 gem 'pry', '~> 0.13.1'
+gem 'acts_as_votable'
+gem 'jquery-rails'
+
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

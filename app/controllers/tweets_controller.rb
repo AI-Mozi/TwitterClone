@@ -1,6 +1,8 @@
+require 'pry'
 class TweetsController < ApplicationController
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy]
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :like, :unlike]
   before_action :authenticate_user!, except: [:index, :show]
+  respond_to :js, :html, :json
 
   def index
     @tweets = Tweet.all.order("created_at DESC")
@@ -48,6 +50,22 @@ class TweetsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tweets_url, notice: 'Tweet was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def like
+    @tweet.liked_by current_user
+    respond_to do |format|
+      format.html { redirect_back fallback_location: root_path }
+      format.json { render layout:false }
+    end
+  end
+
+  def unlike
+    @tweet.unliked_by current_user
+    respond_to do |format|
+      format.html { redirect_back fallback_location: root_path }
+      format.json { render layout:false }
     end
   end
 
