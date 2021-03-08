@@ -2,7 +2,7 @@
   <div class="column">
     <%= simple_form_for([@tweet, @tweet.comments.build]) do |f| %>
     <article class="media">
-      <figure class="media-left">
+      <figure class="media-left center-nick">
         <p class="image is-64x64">
           <%= gravatar_image_tag(current_user.email, size: 64, alt: current_user.name) %>
         </p>
@@ -14,7 +14,7 @@
       <div class="media-content">
         <div class="field">
           <p class="control">
-            <%= f.input :body, input_html: {class: 'textarea'}, wrapper: false, label_html: {class: 'label'} %>
+            <%= f.input :body, label: "Add a comment", input_html: {class: 'textarea'}, wrapper: false, label_html: {class: 'label'} %>
           </p>
         </div>
         <nav class="level">
