@@ -28,12 +28,6 @@ ActiveRecord::Schema.define(version: 2021_03_07_140902) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
-    t.integer "cached_votes_up", default: 0
-    t.integer "cached_votes_down", default: 0
-    t.integer "cached_votes_score", default: 0
-    t.index ["cached_votes_down"], name: "index_tweets_on_cached_votes_down"
-    t.index ["cached_votes_score"], name: "index_tweets_on_cached_votes_score"
-    t.index ["cached_votes_up"], name: "index_tweets_on_cached_votes_up"
   end
 
   create_table "users", force: :cascade do |t|
@@ -42,6 +36,9 @@ ActiveRecord::Schema.define(version: 2021_03_07_140902) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"

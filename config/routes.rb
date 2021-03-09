@@ -13,6 +13,12 @@ Rails.application.routes.draw do
           put "unlike", to: 'tweets#unlike'
       end
   end
+
+  resources :users do
+    member do
+      get :confirm_email
+    end
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'tweets#index'
 
