@@ -14,10 +14,23 @@
             <p><%= @tweet.tweet %></p>
           </div>
           <% if user_signed_in? %>
-          <% if @tweet.user_id == current_user.id %>
           <nav class="level">
             <div class="level-left">
+              <p class="parent-likes">
+                <% if current_user.liked? @tweet %>
+                  <%= link_to unlike_tweet_path(@tweet), method: :put, class: 'unlike_tweet' do %>
+                  <span class="icon"><i class="fa fa-heart has-text-danger"></i></span>
+                  <span class="vote_count"><%= @tweet.get_likes.size %></span>
+                  <%end%>
+                <%else%>
+                  <%= link_to like_tweet_path(@tweet), method: :put, class: 'like_tweet' do %>
+                  <span class="icon"><i class="fa fa-heart"></i></span>
+                  <span class="vote_count"><%= @tweet.get_likes.size %></span>
+                  <%end%>
+                <%end%>
+              </p>
             </div>
+            <% if @tweet.user_id == current_user.id %>
             <div class="level-right ">
               <%= link_to edit_tweet_path(@tweet), class: "level-item" do %>
               <span class="icon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
@@ -31,11 +44,13 @@
           <% end %>
         </div>
       </article>
-      <div class="reply">
-        <%= render 'comments/form' %>
-      </div>
+      <% if user_signed_in? %>
+        <hr>
+        <div class="reply">
+          <%= render 'comments/form' %>
+        </div>
+      <%end%>
     </div>
-
   </div>
 </div>
 
@@ -62,9 +77,9 @@
         </div>
         <div class="media-right">
           <% if user_signed_in? %>
-            <% if comment.name == current_user.name %>
-              <%= link_to "Del",[comment.tweet,comment], class: "delete", method: :delete, data: {confirm: "Are you sure?"} %>
-            <%end%>
+          <% if comment.name == current_user.name %>
+          <%= link_to "Del",[comment.tweet,comment], class: "delete", method: :delete, data: {confirm: "Are you sure?"} %>
+          <%end%>
           <%end%>
         </div>
       </article>
